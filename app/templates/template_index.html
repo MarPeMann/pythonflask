@@ -1,15 +1,35 @@
-<!doctype html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>{{title}}</title>
-</head>
-<body>
-	<h1>Welcome {{name}}</h1>
-	<form action="/user" method="get">
-		<input type="text" name="name" id="name" /><br/>
-		<input type="submit" value="Send" />
-	</form>
 
-</body>
-</html>
+
+
+{% extends 'base.html' %}
+
+{% block title %}-Login-{% endblock %}
+{% block head %}
+	{{super()}}
+	<style type="text/css">
+	.my_container{
+		width: 500px;
+		margin: 30px auto;
+		padding: 8px;
+		border: 2px solid gray;
+		border-radius: 5px;
+	}
+	</style>
+{% endblock %}
+{% block navbar %}{{super()}}{% endblock %}
+{% block body %}
+	{# with super() code from base.html is included #}
+	{{super()}}
+	<div class="my_container">
+		<form action="/login" method="POST">
+			{{form.csrf_token}}
+			{{form.email.label}}
+			{{form.email(class="form-control",id="email")}}
+
+			{{form.passw.label}}
+			{{form.passw(class="form-control",id="email")}}
+
+			{{form.submit(class="btn btn-primary")}}
+		</form>
+	</div>
+{% endblock %}
