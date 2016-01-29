@@ -21,13 +21,13 @@
 	{# with super() code from base.html is included #}
 	{{super()}}
 	<div class="my_container">
-		<form action="/login" method="POST">
+		<form action="/" method="POST">
 			{{form.csrf_token}}
 			{{form.email.label}}
 			{{form.email(class="form-control",id="email")}}
 
 			{{form.passw.label}}
-			{{form.passw(class="form-control",id="email")}}
+			{{form.passw(class="form-control",id="passw")}}
 
 			{{form.submit(class="btn btn-primary")}}
 		</form>
