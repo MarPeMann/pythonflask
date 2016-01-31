@@ -3,7 +3,9 @@ from app import app
 from flask import render_template,request,make_response,flash,redirect
 from app.forms import LoginForm
 from app.forms import RegisterForm
+from app.forms import FriendsForm
 from app.db_models import Users
+from app.db_models import Friends
 from app import db
 
 @app.route('/',methods=['GET','POST'])
@@ -50,5 +52,21 @@ def registerUser():
 		else:
 			flash('Fill in the required fields')
 			return render_template('template_register.html',form=form)
+
+@app.route('/addFriends',methods=['GET','POST'])
+def addFriend():
+	friform = FriendsForm()
+	if request.method == 'GET':
+		return render_template('template_add_friends.html',form=friform)
+	else:
+		if friform.validate_on_submit():
+			friend = Friends(friform.name.data, friform.age.data, friform.address.data)
+			db.session.add(friend)
+			db.session.commit()
+			return redirect('/friends')
+		else:
+			flash('All fields are required')
+			return render_template('template_add_friends.html',form=friform)
+
 
 

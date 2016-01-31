@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}-Add friends-{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+
+
+{% block body %}
+{{super()}}
+<h1>Register</h1>
+<div class="my_container">
+	<form action="/addFriends" method="POST">
+		{{form.csrf_token}}
+		{{form.name.label}}
+		{{form.name(class="form-control",id="name")}}
+
+		{{form.age.label}}
+		{{form.age(class="form-control",id="age")}}
+
+		{{form.address.label}}
+		{{form.address(class="form-control",id="address")}}
+
+		{{form.submit(class="btn btn-primary")}}
+	</form>
+</div>
+
+{% endblock %}
