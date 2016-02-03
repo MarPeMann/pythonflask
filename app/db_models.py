@@ -10,6 +10,8 @@ class Users(db.Model):
 	def __init__(self,email,passw):
 		self.email = email
 		self.passw = passw
+	def __str__(self):
+		return self.email + ' ' + self.passw + ' ' + str(self.id)
 
 
 class Friends(db.Model):
@@ -24,3 +26,7 @@ class Friends(db.Model):
 		self.address = address
 		self.age = age
 		self.user_id = user_id
+	def __str__(self):
+		text = "This is friends object"
+		return text
+
