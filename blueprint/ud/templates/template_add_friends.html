@@ -10,7 +10,7 @@
 {{super()}}
 <h1>Add Friends</h1>
 <div class="my_container">
-	<form action="/addFriends" method="POST" enctype="multipart/form-data">
+	<form action="/addFriends" method="POST">
 		{{form.csrf_token}}
 		{{form.name.label}}
 		{{form.name(class="form-control",id="name")}}
@@ -20,8 +20,6 @@
 
 		{{form.age.label}}
 		{{form.age(class="form-control",id="age")}}
-
-		{{form.upload_file(class="btn btn-primary",id="upload")}}
 
 		{{form.submit(class="btn btn-primary")}}
 	</form>

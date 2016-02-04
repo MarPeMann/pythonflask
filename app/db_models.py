@@ -10,7 +10,7 @@ class Users(db.Model):
 
 	def __init__(self,email,passw):
 		self.email = email
-		self.passw = bcrypt.generate_password_hash(passw)
+		self.passw = generate_password_hash(passw)
 	def __str__(self):
 		return self.email + ' ' + self.passw + ' ' + str(self.id)
 
