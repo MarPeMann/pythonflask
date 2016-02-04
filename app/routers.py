@@ -7,6 +7,7 @@ from app.forms import FriendsForm
 from app.db_models import Users,Friends
 #from app.db_models import Friends
 from app import db
+from flask.ext.bcrypt import check_password_hash
 
 @app.route('/',methods=['GET','POST'])
 def index():
@@ -18,8 +19,8 @@ def index():
 		#check if form data is valid
 		if login.validate_on_submit():
 			#check if correct credentials
-			user = Users.query.filter_by(email=login.email.data).filter_by(passw=login.passw.data)
-			if user.count() == 1:
+			user = Users.query.filter_by(email=login.email.data)
+			if user.count() == 1 and (check_password_hash(user[0].passw,login.passw.data)):
 				session['user_id'] = user[0].id
 				session['isLogged'] = True
 				# 1 tapa:
