@@ -79,8 +79,12 @@ def addFriend():
 		return render_template('template_add_friends.html',form=friform,isLogged=True)
 	else:
 		if friform.validate_on_submit():
-			friform.upload_file.data.save('/static/images' + friform.upload_file.data.filename)
 			temp = Friends(friform.name.data,friform.address.data,friform.age.data,session['user_id'])
+			if friform.upload_file.data:
+				filename = secure_filename(friform.upload_file.data.filename)
+				friform.upload_file.data.save('/static/images' + filename)
+				temp.filename = 'app/static/images/' + filename
+
 			db.session.add(temp)
 			db.session.commit()
 			# 2 tapa
